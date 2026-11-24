@@ -1,0 +1,29 @@
+[Unit]
+Description=Presenton Next.js frontend standalone (port 3000)
+Documentation=https://github.com/presenton/presenton
+After=network.target presenton-fastapi.service
+PartOf=presenton.target
+Wants=presenton-fastapi.service
+
+[Service]
+Type=simple
+User=presenton
+Group=presenton
+EnvironmentFile=/etc/presenton/presenton.env
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3000
+WorkingDirectory=/opt/presenton/servers/nextjs/.next-build/standalone
+ExecStart=/usr/bin/node /opt/presenton/servers/nextjs/.next-build/standalone/server.js
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=120
+# L'export PPTX/PDF lance Chromium : éviter un durcissement trop strict (PrivateDevices, etc.).
+NoNewPrivileges=true
+PrivateTmp=false
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/lib/presenton /var/cache/presenton /tmp
+# /dev/shm est utilisé par Chromium lors des exports
+
+[Install]
+WantedBy=presenton.target

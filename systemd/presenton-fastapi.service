@@ -1,0 +1,27 @@
+[Unit]
+Description=Presenton FastAPI backend (port 8000)
+Documentation=https://github.com/presenton/presenton
+After=network.target
+PartOf=presenton.target
+
+[Service]
+Type=simple
+User=presenton
+Group=presenton
+EnvironmentFile=/etc/presenton/presenton.env
+Environment=COMFYUI_WORKFLOW_FILE=/etc/presenton/comfyui-workflow.json
+WorkingDirectory=/opt/presenton/servers/fastapi
+ExecStart=/opt/presenton/scripts/presenton-fastapi-start.sh
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=120
+# L'export PPTX/PDF lance Chromium : éviter un durcissement trop strict (PrivateDevices, etc.).
+NoNewPrivileges=true
+PrivateTmp=false
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/lib/presenton /var/cache/presenton /tmp
+# /dev/shm est utilisé par Chromium lors des exports
+
+[Install]
+WantedBy=presenton.target

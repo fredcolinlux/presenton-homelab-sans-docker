@@ -1,0 +1,29 @@
+# Fichiers de config locaux (peuvent contenir des mots de passe ou des clés)
+presenton.env
+*.env
+!*.env.example
+
+# Secrets et clés
+*.pem
+*.key
+*.crt
+cookies.txt
+auth.json
+
+# Fichiers d'éditeur / OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Restes de build éventuels (ce dépôt ne contient que des scripts)
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+build/
+*.log

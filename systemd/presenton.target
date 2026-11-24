@@ -1,0 +1,8 @@
+[Unit]
+Description=Presenton (FastAPI + MCP + Next.js)
+Documentation=https://github.com/presenton/presenton
+Wants=presenton-fastapi.service presenton-mcp.service presenton-nextjs.service
+After=network.target presenton-fastapi.service presenton-mcp.service presenton-nextjs.service
+
+[Install]
+WantedBy=multi-user.target
